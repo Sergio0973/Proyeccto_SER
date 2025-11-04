@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Mi Coach Financiero Virtual — Prototype</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <script type="module" src="js/app.js"></script>
+</head>
+
+<body>
+    <aside>
+        <header>
+            <h1>Mi Coach Financiero Virtual</h1>
+        </header>
+
+        <div class="card">
+            <div class="stat">
+                <div>
+                    <div class="v" id="totalSaved">$0</div>
+                    <div class="tiny">Ahorro acumulado</div>
+                </div>
+                <div style="margin-left:auto;text-align:right">
+                    <div class="tiny">Meta activa</div>
+                    <div id="activeGoalTitle" class="muted">—</div>
+                </div>
+            </div>
+
+            <div style="margin-top:12px">
+                <label for="contribAmount">Aportar ahora (valor)</label>
+                <div class="row" style="margin-top:8px">
+                    <input id="contribAmount" type="number" placeholder="ej. 20000" />
+                    <button id="addContrib">Aportar</button>
+                </div>
+                <div class="tiny" style="margin-top:8px">Aporta a la meta seleccionada y verás el progreso.</div>
+            </div>
+
+            <div style="margin-top:12px">
+                <label for="quickReminder">Crear recordatorio (minutos)</label>
+                <div class="row" style="margin-top:8px">
+                    <input id="quickReminder" type="number" placeholder="ej. 60" />
+                    <button id="setReminder">Crear</button>
+                </div>
+                <div class="tiny">El prototipo pedirá permiso para notificaciones cuando uses recordatorios.</div>
+            </div>
+
+        </div>
+
+        <div class="card">
+            <div class="tiny">Recordatorios activos</div>
+            <div id="remindersList" class="muted tiny" style="margin-top:8px">—</div>
+        </div>
+
+        <footer>
+            <div class="tiny">Consejo: usa la bitácora para identificar emociones que activan compras impulsivas.</div>
+        </footer>
+    </aside>
+
+    <main>
+        <section class="grid">
+            <div class="card">
+                <div style="display:flex;align-items:center;justify-content:space-between">
+                    <div>
+                        <div class="tiny">Simulador de ahorro</div>
+                        <strong id="simResult">Define una meta</strong>
+                    </div>
+                    <div class="tiny muted">Calcula cuánto debes ahorrar por periodo</div>
+                </div>
+
+                <div style="margin-top:12px">
+                    <label>Meta (nombre)</label>
+                    <input id="simName" placeholder="Ej: Fondo de emergencia" />
+                    <div style="display:flex;gap:8px;margin-top:8px">
+                        <div style="flex:1">
+                            <label>Monto objetivo</label>
+                            <input id="simTarget" type="number" placeholder="ej. 1000000" />
+                        </div>
+                        <div style="width:140px">
+                            <label>Meses</label>
+                            <input id="simMonths" type="number" placeholder="ej. 6" />
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:8px;margin-top:12px">
+                        <button id="runSim">Calcular</button>
+                        <button id="saveAsGoal">Guardar como meta</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                    <div>
+                        <div class="tiny">Estado emocional</div>
+                        <strong>Bitácora emocional</strong>
+                    </div>
+                    <div class="tiny muted">Registra cómo te sientes al gastar o ahorrar</div>
+                </div>
+
+                <div style="margin-top:12px">
+                    <label>Hoy me siento...</label>
+                    <input id="mood" placeholder="ej. ansioso, motivado" />
+                    <label style="margin-top:8px">Nota</label>
+                    <textarea id="moodNote" rows="3"
+                        placeholder="¿Qué me llevó a sentirlo? ¿Gasté o ahorré?"></textarea>
+                    <div style="display:flex;gap:8px;margin-top:8px">
+                        <button id="addNote">Guardar</button>
+                        <button id="clearNotes">Borrar bitácora</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="card full">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                    <div>
+                        <div class="tiny">Metas financieras</div>
+                        <strong>Lista de metas</strong>
+                    </div>
+                    <div class="tiny muted">Crear, editar y aportar</div>
+                </div>
+
+                <div style="margin-top:12px;display:flex;gap:8px">
+                    <input id="newGoalName" placeholder="Nombre de la meta" />
+                    <input id="newGoalTarget" type="number" placeholder="Monto objetivo" />
+                    <button id="createGoal">Crear meta</button>
+                </div>
+
+                <div class="goals-list" id="goalsList"></div>
+            </div>
+
+            <div class="card full">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                    <div>
+                        <div class="tiny">Seguimiento</div>
+                        <strong>Checklist & progreso</strong>
+                    </div>
+                    <div class="tiny muted">Microacciones y recordatorios</div>
+                </div>
+
+                <div style="margin-top:12px;display:flex;gap:8px;align-items:flex-end">
+                    <input id="microText" placeholder="Microacción semanal (ej. Registrar gastos)" />
+                    <button id="addMicro">Añadir</button>
+                </div>
+                <ul id="micros" class="muted tiny" style="margin-top:12px"></ul>
+            </div>
+
+            <div class="card full">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                    <div>
+                        <div class="tiny">Reflexiones</div>
+                        <strong>Bitácora emocional financiera</strong>
+                    </div>
+                </div>
+                <div class="journal-list" id="journal"></div>
+            </div>
+
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

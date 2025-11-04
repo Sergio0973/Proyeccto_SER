@@ -1,0 +1,183 @@
+:root {
+    --bg: #0f1724;
+    --card: #0b1220;
+    --accent: #6ee7b7;
+    --muted: #9aa6b2;
+    --glass: rgba(255, 255, 255, 0.03)
+}
+
+* {
+    box-sizing: border-box;
+    font-family: Inter, ui-sans-serif, system-ui, Segoe UI, Roboto, 'Helvetica Neue', Arial
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(180deg, #071126 0%, #081430 100%);
+    color: #e6f0f2;
+    min-height: 100vh;
+    display: flex
+}
+
+aside {
+    width: 320px;
+    padding: 24px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+    backdrop-filter: blur(6px);
+    border-right: 1px solid rgba(255, 255, 255, 0.03)
+}
+
+header h1 {
+    font-size: 20px;
+    margin: 0 0 8px
+}
+
+header p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px
+}
+
+.card {
+    background: var(--card);
+    padding: 14px;
+    border-radius: 12px;
+    margin-top: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.02)
+}
+
+.stat {
+    display: flex;
+    gap: 12px;
+    align-items: center
+}
+
+.stat .v {
+    font-size: 20px;
+    font-weight: 700
+}
+
+main {
+    flex: 1;
+    padding: 28px;
+    overflow: auto
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px
+}
+
+.full {
+    grid-column: 1/-1
+}
+
+label {
+    font-size: 13px;
+    color: var(--muted)
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    background: var(--glass);
+    color: inherit;
+    margin-top: 8px
+}
+
+button {
+    background: var(--accent);
+    border: none;
+    color: #042018;
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600
+}
+
+.goals-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 12px
+}
+
+.goal {
+    padding: 10px;
+    border-radius: 10px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.015));
+    border: 1px solid rgba(255, 255, 255, 0.02)
+}
+
+.progress {
+    height: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 8px
+}
+
+.progress>i {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), #3ddc97);
+    width: 0%
+}
+
+.row {
+    display: flex;
+    gap: 8px;
+    align-items: center
+}
+
+.journal-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 12px
+}
+
+.note {
+    padding: 10px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.02)
+}
+
+.muted {
+    color: var(--muted)
+}
+
+footer {
+    margin-top: 18px;
+    color: var(--muted);
+    font-size: 13px
+}
+
+.tiny {
+    font-size: 12px;
+    color: var(--muted)
+}
+
+.controls {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap
+}
+
+.goal-controls {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px
+}
+
+.small {
+    padding: 6px 8px;
+    font-size: 13px;
+    border-radius: 8px
+}
