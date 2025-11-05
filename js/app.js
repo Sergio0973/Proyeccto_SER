@@ -53,37 +53,39 @@ document.addEventListener('DOMContentLoaded', () => {
             goalsList.innerHTML = '<div class="muted">No hay metas. Crea una usando el formulario arriba.</div>';
             return;
         }
+
         goals.forEach((g, idx) => {
             const percent = g.target > 0 ? Math.min(100, (g.saved / g.target) * 100) : 0;
             const div = document.createElement('div');
             div.className = 'goal';
             div.dataset.idx = idx;
             div.innerHTML = `
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <div><strong>${g.name}</strong><div class="tiny muted">Meta: $${money(g.target)}</div></div>
-          <div style="text-align:right">
-            <div class="tiny">${percent.toFixed(1)}%</div>
-            <div class="tiny muted">Guardado: $${money(g.saved)}</div>
-          </div>
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div><strong>${g.name}</strong><div class="tiny muted">Meta: $${money(g.target)}</div></div>
+        <div style="text-align:right">
+          <div class="tiny">${percent.toFixed(1)}%</div>
+          <div class="tiny muted">Guardado: $${money(g.saved)}</div>
         </div>
-        <div class="progress"><i style="width:${percent}%"></i></div>
-        <div class="goal-controls">
-          <button class="small selectBtn" data-idx="${idx}">${activeGoal === idx ? 'Activa' : 'Seleccionar'}</button>
-          <button class="small contribBtn" data-idx="${idx}">Aportar</button>
-          <button class="small" data-idx="${idx}" style="background:#ffb4a2;color:#2b0600;border:none;border-radius:8px">Eliminar</button>
-        </div>
-      `;
+      </div>
+      <div class="progress"><i style="width:${percent}%"></i></div>
+      <div class="goal-controls">
+        <button class="small selectBtn" data-idx="${idx}">${activeGoal === idx ? 'Activa' : 'Seleccionar'}</button>
+        <button class="small contribBtn" data-idx="${idx}">Aportar</button>
+        <button class="small deleteBtn" data-idx="${idx}" style="background:#ffb4a2;color:#2b0600;border:none;border-radius:8px">Eliminar</button>
+      </div>
+    `;
             goalsList.appendChild(div);
         });
 
-        // attach handlers (delegation is simpler but here we attach per button)
-        qsa('.selectBtn').forEach(b => b.onclick = (e) => {
+        // EVENTOS
+        qsa('.selectBtn').forEach(b => b.onclick = () => {
             const i = Number(b.dataset.idx);
             activeGoal = i;
             DB.save('activeGoal', activeGoal);
             renderAll();
         });
-        qsa('.contribBtn').forEach(b => b.onclick = (e) => {
+
+        qsa('.contribBtn').forEach(b => b.onclick = () => {
             const i = Number(b.dataset.idx);
             const val = prompt('Ingrese monto a aportar (número):', '0');
             const n = Number(val);
@@ -92,16 +94,19 @@ document.addEventListener('DOMContentLoaded', () => {
             DB.save('goals', goals);
             renderAll();
         });
-        qsa('.goal-controls button[style*="Eliminar"]').forEach(b => b.onclick = () => {
+
+        // botón eliminar
+        qsa('.deleteBtn').forEach(b => b.onclick = () => {
             const i = Number(b.dataset.idx);
-            if (!confirm(`Eliminar la meta "${goals[i].name}"?`)) return;
+            if (!confirm(`¿Eliminar la meta "${goals[i].name}"?`)) return;
             goals.splice(i, 1);
-            if (activeGoal !== null && activeGoal === i) activeGoal = null;
+            if (activeGoal === i) activeGoal = null;
             DB.save('goals', goals);
             DB.save('activeGoal', activeGoal);
             renderAll();
         });
     }
+
 
     function renderJournal() {
         journalList.innerHTML = '';
